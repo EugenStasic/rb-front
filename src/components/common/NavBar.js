@@ -19,6 +19,11 @@ function NavBar() {
             <Link to={isAuthenticated ? '/userwelcome' : '/'}>
                 <button>Home</button>
             </Link>
+            {isAuthenticated && (
+                <Link to='/userdash'>
+                    <button>Dashboard</button>
+                </Link>
+            )}
             {!isAuthenticated && (
                 <>
                     <Link to='/register'>

@@ -1,39 +1,78 @@
 import React from 'react';
+import { validateRegister } from '../../utils/utils';
+import { Form, Field } from 'react-final-form';
 
-function RegisterForm({ userData, setUserData, handleSubmit, message }) {
-    return (
-        <div>
-            <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-            <input 
-                type="text"
-                placeholder='Username'
-                value={userData.username}
-                onChange={e => setUserData({ ...userData, username: e.target.value })}
-            />
-            <input
-                type='email'
-                placeholder='Email'
-                value={userData.email}
-                onChange={e => setUserData({ ...userData, email: e.target.value })}
-            />
-            <input 
-                type='password'
-                placeholder='Password'
-                value={userData.password}
-                onChange={e => setUserData({ ...userData, password: e.target.value })}
-            />
-            <input
-                type='password'
-                placeholder='Confirm Password'
-                value={userData.confirmPassword}
-                onChange={e => setUserData({ ...userData, confirmPassword: e.target.value})}
-            />
-            <button type='submit'>Register</button>
-            </form>
+function RegisterForm({ onSubmit, message }) {
+  return (
+    <div>
+      <h1>Register</h1>
+      <Form
+        onSubmit={onSubmit}
+        validate={validateRegister}
+        render={({ handleSubmit, form, submitting, pristine, hasValidationErrors }) => (
+          <form onSubmit={handleSubmit}>
+
+            <Field name="firstName">
+              {({ input, meta }) => (
+                <div>
+                  <label>First Name</label>
+                  <input {...input} type="text" placeholder="First Name" />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+              )}
+            </Field>
+
+            <Field name="lastName">
+              {({ input, meta }) => (
+                <div>
+                  <label>Last Name</label>
+                  <input {...input} type="text" placeholder="Last Name" />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+              )}
+            </Field>
+
+            <Field name="email">
+              {({ input, meta }) => (
+                <div>
+                  <label>Email</label>
+                  <input {...input} type="email" placeholder="Email" />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+              )}
+            </Field>
+
+            <Field name="password">
+              {({ input, meta }) => (
+                <div>
+                  <label>Password</label>
+                  <input {...input} type="password" placeholder="Password" />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+              )}
+            </Field>
+
+            <Field name="confirmPassword">
+              {({ input, meta }) => (
+                <div>
+                  <label>Confirm Password</label>
+                  <input {...input} type="password" placeholder="Confirm Password" />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+              )}
+            </Field>
+
+            <div className="buttons">
+              <button type="submit" disabled={submitting || hasValidationErrors}>
+                Register
+              </button>
+            </div>
             {message && <p>{message}</p>}
-        </div>
-    )
+          </form>
+        )}
+      />
+    </div>
+  );
 }
 
 export default RegisterForm;

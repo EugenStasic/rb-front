@@ -1,27 +1,42 @@
 import React from 'react';
+import { Form, Field } from 'react-final-form';
+import { validateLogin } from '../../utils/utils';
 
-function LoginForm({ credentials, setCredentials, handleSubmit, message }) {
-    return(
-        <div>
-            <h1>Log In</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                type='email'
-                placeholder='Email'
-                value={credentials.email}
-                onChange={e => setCredentials({ ...credentials, email: e.target.value })}
-                />
-                <input
-                type='password'
-                placeholder='Password'
-                value={credentials.password}
-                onChange={e => setCredentials({ ...credentials, password: e.target.value })}
-                />
-                <button type='submit'>Log In</button>
-            </form>
-            {message && <p>{message}</p>}
-        </div>
-    )
+function LoginForm({ onSubmit, message }) {
+  return (
+    <div>
+      <h1>Log In</h1>
+      <Form
+        onSubmit={onSubmit}
+        validate={validateLogin}
+        render={({ handleSubmit, submitting }) => (
+          <form onSubmit={handleSubmit}>
+
+            <Field name="email">
+              {({ input, meta }) => (
+                <div>
+                  <input {...input} type="email" placeholder="Email" />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+              )}
+            </Field>
+
+            <Field name="password">
+              {({ input, meta }) => (
+                <div>
+                  <input {...input} type="password" placeholder="Password" />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+              )}
+            </Field>
+            
+            <button type="submit" disabled={submitting}>Log In</button>
+          </form>
+        )}
+      />
+      {message && <p>{message}</p>}
+    </div>
+  );
 }
 
 export default LoginForm;

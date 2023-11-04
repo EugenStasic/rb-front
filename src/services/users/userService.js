@@ -10,3 +10,12 @@ export const fetchUserDetails = async (userId) => {
         throw error;
     }
 }
+
+export const updateUserInformation = async (userId, updateData) => {
+    try {
+        const response = await axios.patch(`${BASE_URL}/user/${userId}`, updateData);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

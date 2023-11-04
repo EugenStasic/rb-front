@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { fetchUserDetails } from '../../services/users/userService';
 
 function UserWelcome() {
-    const [username, setUsername] = useState('');
+    const [firstName, setfirstName] = useState('');
     const [loading, setLoading] = useState(true);
     const userId = useSelector(state => state.auth.userId);
 
@@ -11,7 +11,7 @@ function UserWelcome() {
         const getUserDetails = async () => {
             try {
                 const userDetails = await fetchUserDetails(userId);
-                setUsername(userDetails.username);
+                setfirstName(userDetails.firstName);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching user details:", error);
@@ -30,7 +30,7 @@ function UserWelcome() {
 
     return(
         <div>
-            <h1>Welcome to rent a boat, {username}</h1>
+            <h1>Welcome to rent a boat, {firstName}</h1>
         </div>
     )
 }
