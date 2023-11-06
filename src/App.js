@@ -9,6 +9,7 @@ import UserWelcome from './pages/start/UserWelcome';
 import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
 import UserDash from './pages/userDasboard/userDash';
+import BoatRegister from './pages/userDasboard/boats/BoatRegister';
 import { clearMessages } from './actions/authActions';
 
 const RouteChangesWatcher = () => {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/userwelcome" element={<UserWelcome />} />
           <Route path="/userdash" element={<UserDash />} />
+          <Route path="/registerboat" element={<BoatRegister />} />
         </Routes>
       </Router>
     </Provider>

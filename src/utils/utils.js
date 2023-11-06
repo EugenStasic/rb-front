@@ -32,6 +32,59 @@ export const validateRegister = values => {
     return errors;
   };
 
+  export const validateBoatRegister = values => {
+    const errors = {};
+    const validSkipperOptions = ['Yes', 'No', 'Both'];
+  
+    if (!values.type) {
+      errors.type = 'Required';
+    }
+  
+    if (!values.manufacturer) {
+      errors.manufacturer = 'Required';
+    }
+  
+    if (!values.model) {
+      errors.model = 'Required';
+    }
+  
+    if (!values.cityHarbour) {
+      errors.cityHarbour = 'Required';
+    }
+  
+    if (!values.skipperOption || !validSkipperOptions.includes(values.skipperOption)) {
+      errors.skipperOption = 'Invalid skipper option';
+    }
+  
+    if (!values.capacity) {
+      errors.capacity = 'Required';
+    }
+  
+    if (!values.length) {
+      errors.length = 'Required';
+    }
+  
+    errors.engine = {};
+    if (!values.engine) {
+      errors.engine.type = 'Engine details are required';
+      errors.engine.power = 'Engine details are required';
+    } else {
+      if (!values.engine.type) {
+        errors.engine.type = 'Required';
+      }
+  
+      if (!values.engine.power) {
+        errors.engine.power = 'Required';
+      }
+    }
+  
+    if (Object.keys(errors.engine).length === 0) {
+      delete errors.engine;
+    }
+  
+    return errors;
+  };
+  
   export const validateLogin = values => {
     const errors = {};
     if (!values.email) {
