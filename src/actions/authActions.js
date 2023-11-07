@@ -4,27 +4,23 @@ import * as types from "./authTypes";
 
 // REGISTRACIJA
 
-export function registerRequest() {
-    return { type: types.REGISTER_REQUEST };
-}
-
-export function registerSuccess(data) {
-    return { type: types.REGISTER_SUCCESS };
-}
-
-export function registerError(error) {
-    return { type: types.REGISTER_ERROR, payload: getErrorMessage(error) };
-}
-
 export function register(userData) {
     return async function (dispatch) {
-        dispatch(registerRequest());
+        dispatch({
+            type: types.REGISTER_REQUEST
+        });
 
         try{
-            const response = await registerService(userData);
-            dispatch(registerSuccess(response));
+            await registerService(userData);
+            dispatch({
+                type: types.REGISTER_SUCCESS,
+                payload: { successMessage: "Registration successful! Please log in to continue." }
+            });
         } catch (error) {
-            dispatch(registerError(error));
+            dispatch({
+                type: types.REGISTER_ERROR,
+                payload: getErrorMessage(error)
+            });
         }
     }
 }
@@ -35,9 +31,15 @@ export function login (email, password) {
     return async function (dispatch) {
         try {
             const response = await loginService(email, password);
-            dispatch({ type: types.LOGIN_SUCCESS, payload: response.data, isAuthenticated: true });
+            dispatch({
+                type: types.LOGIN_SUCCESS,
+                payload: { token: response.data.token }
+            });
         } catch (error) {
-            dispatch({ type: types.LOGIN_ERROR, payload: error.response.data });
+            dispatch({
+                type: types.LOGIN_ERROR,
+                payload: getErrorMessage(error)
+            });
         }
     }
 }
@@ -48,9 +50,14 @@ export function logout() {
     return async function (dispatch) {
         try {
             await logoutService();
-            dispatch({ type: types.LOGOUT_SUCCESS });
+            dispatch({
+                type: types.LOGOUT_SUCCESS
+            });
         } catch (error) {
-            dispatch({ type: types.LOGOUT_ERROR, payload: error.response.data });
+            dispatch({
+                type: types.LOGOUT_ERROR,
+                payload: getErrorMessage(error)
+            });
         }
     }
 }

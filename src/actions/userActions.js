@@ -1,11 +1,12 @@
 import * as types from './userTypes';
 import { fetchUserDetails, updateUserInformation } from '../services/users/userService';
+import { getErrorMessage } from '../utils/utils';
 
-export const getUserInfo = (userId) => async (dispatch) => {
+export const getUserInfo = () => async (dispatch) => {
     dispatch ({ type: types.FETCH_USER_INFO_REQUEST });
 
     try {
-        const userInfo = await fetchUserDetails(userId);
+        const userInfo = await fetchUserDetails();
         dispatch({
             type: types.FETCH_USER_INFO_SUCCESS,
             payload: userInfo
@@ -13,16 +14,18 @@ export const getUserInfo = (userId) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: types.FETCH_USER_INFO_FAILURE,
-            payload: error.message
+            payload: getErrorMessage(error)
         });
     }
 };
 
-export const updateUserInfo = (userId, updateInfo) => async (dispatch) => {
-    dispatch({ type: types.UPDATE_USER_INFO_REQUEST });
+export const updateUserInfo = (updateInfo) => async (dispatch) => {
+    dispatch({
+        type: types.UPDATE_USER_INFO_REQUEST
+    });
 
     try {
-        const updatedUser = await updateUserInformation(userId, updateInfo);
+        const updatedUser = await updateUserInformation(updateInfo);
         dispatch({
             type: types.UPDATE_USER_INFO_SUCCESS,
             payload: updatedUser
@@ -30,7 +33,7 @@ export const updateUserInfo = (userId, updateInfo) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: types.UPDATE_USER_INFO_FAILURE,
-            payload: error.message
+            payload: getErrorMessage(error)
         });
     }
 };

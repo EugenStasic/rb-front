@@ -1,19 +1,17 @@
-import axios from "axios";
+import api from "../api";
 
-const BASE_URL = 'http://localhost:5000';
-
-export const fetchUserDetails = async (userId) => {
+export const fetchUserDetails = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}/user/${userId}`);
+        const response = await api.get(`/user/me`);
         return response.data;
     } catch (error) {
         throw error;
     }
 }
 
-export const updateUserInformation = async (userId, updateData) => {
+export const updateUserInformation = async (updateData) => {
     try {
-        const response = await axios.patch(`${BASE_URL}/user/${userId}`, updateData);
+        const response = await api.patch(`/user/me`, updateData);
         return response.data;
     } catch (error) {
         throw error;

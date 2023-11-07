@@ -5,17 +5,14 @@ import { getUserInfo, updateUserInfo } from '../../actions/userActions';
 
 const UserDash = () => {
     const dispatch = useDispatch();
-    const userId = useSelector(state => state.auth.userId);
     const { userInfo, loading, error } = useSelector(state => state.user);
     
     useEffect(() => {
-        if (userId) {
-            dispatch(getUserInfo(userId));
-        }
-    }, [userId, dispatch]);
+            dispatch(getUserInfo());
+    }, [dispatch]);
 
     const handleSubmit = async (values) => {
-        dispatch(updateUserInfo(userId, values));
+        dispatch(updateUserInfo(values));
     };
 
     if (loading) {

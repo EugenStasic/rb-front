@@ -2,7 +2,6 @@ import * as types from '../actions/authTypes';
 
 const initialState = {
     token: null,
-    userId: null,
     isAuthenticated: false,
     error: null,
     successMessage: null,
@@ -14,7 +13,6 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 token: action.payload.token,
-                userId: action.payload.userId,
                 isAuthenticated: true,
                 error: null,
             };
@@ -45,7 +43,7 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: null,
-                successMessage: "Registration successful! Please log in to continue.",
+                successMessage: action.payload.successMessage,
             };
 
         case types.REGISTER_ERROR:
@@ -55,7 +53,10 @@ const authReducer = (state = initialState, action) => {
             };
 
         case types.CLEAR_MESSAGES:
-            return { ...state, successMessage: null, error: null };
+            return { 
+                    ...state,
+                    successMessage: null, 
+                    error: null };
 
         default:
             return state;

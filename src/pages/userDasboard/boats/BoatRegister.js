@@ -7,10 +7,9 @@ function BoatRegister () {
     const dispatch = useDispatch();
     const error = useSelector(state => state.boat.error);
     const successMessage = useSelector(state => state.boat.successMessage)
-    const userId = useSelector(state => state.auth.userId)
 
-    const onSubmit = async (values) => {
-        dispatch(registerBoat(userId, values));
+    const onSubmit = async (boatData) => {
+        dispatch(registerBoat(boatData));
     }
 
     return (
