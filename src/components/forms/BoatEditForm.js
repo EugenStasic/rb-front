@@ -105,7 +105,7 @@ function BoatEditForm({ onSubmit, initialValues, message }) {
                         </Field>
                         
                         <div className="buttons">
-                            <button type="submit" disabled={submitting || hasValidationErrors}>Register the boat</button>
+                            <button type="submit" disabled={submitting || hasValidationErrors}>Submit Information</button>
                         </div>
                         {message && <p>{message}</p>}
                     </form>

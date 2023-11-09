@@ -1,22 +1,17 @@
-import React, { useEffect} from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteBoatListing, getUserBoatsInfo } from '../../../actions/boatActions';
+import { deleteBoatListing } from '../../../actions/boatActions';
 import MyBoatCard from '../../../components/cards/MyBoatCard';
 import { useNavigate } from 'react-router';
 
 const MyBoats = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const boats = useSelector(state => state.boat.boats);
-    const loading = useSelector(state => state.boat.loading);
-    const error = useSelector(state => state.boat.error);
+    const { boats, loading } = useSelector(state => state.boat)
 
-    useEffect(() => {
-        dispatch(getUserBoatsInfo());
-    }, [dispatch]);
+
 
     if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
 
     const handleEdit = (boatId) => {
         navigate(`/edit-boat/${boatId}`)

@@ -28,7 +28,8 @@ export const updateUserInfo = (updateInfo) => async (dispatch) => {
         const updatedUser = await updateUserInformation(updateInfo);
         dispatch({
             type: types.UPDATE_USER_INFO_SUCCESS,
-            payload: updatedUser
+            payload: updatedUser,
+            successMessage: 'User information updated'
         });
     } catch (error) {
         dispatch({

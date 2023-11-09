@@ -1,4 +1,5 @@
 import * as types from '../actions/authTypes';
+import { CLEAR_MESSAGES } from '../actions/globalTypes';
 
 const initialState = {
     token: null,
@@ -14,7 +15,7 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 token: action.payload.token,
                 isAuthenticated: true,
-                error: null,
+                successMessage: action.successMessage
             };
 
         case types.LOGIN_ERROR:
@@ -24,7 +25,10 @@ const authReducer = (state = initialState, action) => {
             };
 
         case types.LOGOUT_SUCCESS:
-            return initialState;
+            return {
+                ...initialState,
+                successMessage: action.successMessage
+            };
 
         case types.LOGOUT_ERROR:
             return {
@@ -43,7 +47,7 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: null,
-                successMessage: action.payload.successMessage,
+                successMessage: action.successMessage
             };
 
         case types.REGISTER_ERROR:
@@ -52,11 +56,12 @@ const authReducer = (state = initialState, action) => {
                 error: action.payload.message,
             };
 
-        case types.CLEAR_MESSAGES:
+        case CLEAR_MESSAGES:
             return { 
                     ...state,
-                    successMessage: null, 
-                    error: null };
+                    error: null,
+                    successMessage: null
+                };
 
         default:
             return state;

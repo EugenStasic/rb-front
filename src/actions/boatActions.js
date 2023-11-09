@@ -12,10 +12,8 @@ export function registerBoat(boatData) {
             const newBoat = await registerBoatService(boatData);
             dispatch({
                 type: types.BOAT_REGISTER_SUCCESS,
-                payload: {
-                    boat: newBoat, successMessage: 'Boat Registered Successfully!',
-                    loading: false
-                } 
+                payload: newBoat,
+                successMessage: 'Boat registered successfully'
             });
         } catch (error) {
             dispatch({
@@ -79,8 +77,9 @@ export function updateBoatInformation(boatId, updateData) {
             const updatedBoat = await updateBoatInformationService(boatId, updateData);
             dispatch({
                 type: types.EDIT_BOAT_LISTING_SUCCESS,
-                payload: updatedBoat
-            })
+                payload: updatedBoat,
+                successMessage: "Boat information updated successfully!"
+            });
         } catch (error) {
             dispatch({
                 type: types.EDIT_BOAT_LISTING_FAILURE,
@@ -100,7 +99,8 @@ export function deleteBoatListing(boatId) {
             await deleteBoatListingService(boatId);
             dispatch({
                 type: types.DELETE_BOAT_LISTING_SUCCESS,
-                payload: boatId
+                payload: boatId,
+                successMessage: 'Boat listing deleted'
             });
         } catch (error) {
             dispatch({

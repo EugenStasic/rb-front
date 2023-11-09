@@ -7,9 +7,7 @@ import { useParams } from 'react-router';
 const EditBoat = () => {
     const { boatId } = useParams();
     const dispatch = useDispatch();
-    const loading = useSelector(state => state.boat.loading);
-    const boat = useSelector(state => state.boat.currentBoat);
-    const error = useSelector(state => state.boat.error);
+    const { currentBoat, loading} = useSelector(state => state.boat )
 
 
     useEffect(() => {
@@ -17,22 +15,19 @@ const EditBoat = () => {
     }, [dispatch, boatId]);
 
     const handleSubmit = async (updatedData) => {
-       dispatch(updateBoatInformation(boatId, updatedData));
+       await dispatch(updateBoatInformation(boatId, updatedData));
+       dispatch(getBoatInfo(boatId));
     };
 
     if (loading) {
         return <div>Loading...</div>
-    }
-
-    if (error) {
-        return <div>Error: {error}</div>
-    }
+    };
 
     return (
         <div>
             <BoatEditForm
-            onSubmit={handleSubmit}
-            initialValues={boat}
+                onSubmit={handleSubmit}
+                initialValues={currentBoat}
             />
         </div>
     )

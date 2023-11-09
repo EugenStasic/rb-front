@@ -12,13 +12,23 @@ import UserDash from './pages/userDasboard/userDash';
 import BoatRegister from './pages/userDasboard/boats/BoatRegister';
 import EditBoat from './pages/userDasboard/boats/EditBoat';
 import MyBoats from './pages/userDasboard/boats/MyBoats';
-import { clearMessages } from './actions/authActions';
+import { clearMessages } from './actions/globalActions';
+import { getUserBoatsInfo } from './actions/boatActions';
+import { getUserInfo } from './actions/userActions';
+import DisplayMessage from './utils/DisplayMessage';
 
 const RouteChangesWatcher = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
   useEffect(() => {
+    if (location.pathname === "/userdash") {
+      dispatch(getUserInfo());
+    };
+    if (location.pathname === "/my-boats") {
+      dispatch(getUserBoatsInfo());
+    };
+
     dispatch(clearMessages());
   }, [location, dispatch]);
 
@@ -30,6 +40,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <NavBar />
+        <DisplayMessage />
         <RouteChangesWatcher />
         <Routes>
           <Route path="/" element={<Welcome />} />

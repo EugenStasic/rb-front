@@ -1,9 +1,11 @@
 import * as types from '../actions/userTypes';
+import { CLEAR_MESSAGES } from '../actions/globalTypes';
 
 const initialState = {
   loading: false,
   userInfo: {},
   error: null,
+  successMessage: null
 };
 
 const userReducer = (state = initialState, action) => {
@@ -12,7 +14,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        error: null
+        error: null,
       };
 
     case types.FETCH_USER_INFO_SUCCESS:
@@ -20,21 +22,21 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         userInfo: action.payload,
-        error: null
+        error: null,
       };
 
     case types.FETCH_USER_INFO_FAILURE:
       return {
         ...state,
         loading: false,
-        error: action.payload
+        error: action.payload,
       };
 
     case types.UPDATE_USER_INFO_REQUEST:
       return {
         ...state,
         loading: true,
-        error: null
+        error: null,
       };
 
     case types.UPDATE_USER_INFO_SUCCESS:
@@ -42,15 +44,23 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         userInfo: action.payload,
-        error: null
+        successMessage: action.successMessage
       };
 
     case types.UPDATE_USER_INFO_FAILURE:
       return {
         ...state,
         loading: false,
-        error: action.payload
+        error: action.payload.error,
       };
+
+    case CLEAR_MESSAGES:
+      return {
+        ...state,
+        successMessage: null,
+        error: null,
+      };
+
     default:
       return state;
   }

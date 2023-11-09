@@ -7,7 +7,7 @@ export const fetchUserDetails = async () => {
     } catch (error) {
         throw error;
     }
-}
+};
 
 export const updateUserInformation = async (updateData) => {
     try {
@@ -16,4 +16,4 @@ export const updateUserInformation = async (updateData) => {
     } catch (error) {
         throw error;
     }
-}
+};

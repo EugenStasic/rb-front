@@ -14,7 +14,7 @@ export function register(userData) {
             await registerService(userData);
             dispatch({
                 type: types.REGISTER_SUCCESS,
-                payload: { successMessage: "Registration successful! Please log in to continue." }
+                successMessage: "Registration successful! Please log in to continue."
             });
         } catch (error) {
             dispatch({
@@ -33,7 +33,8 @@ export function login (email, password) {
             const response = await loginService(email, password);
             dispatch({
                 type: types.LOGIN_SUCCESS,
-                payload: { token: response.data.token }
+                payload: { token: response.data.token },
+                successMessage: "Log in successfull!"
             });
         } catch (error) {
             dispatch({
@@ -51,7 +52,8 @@ export function logout() {
         try {
             await logoutService();
             dispatch({
-                type: types.LOGOUT_SUCCESS
+                type: types.LOGOUT_SUCCESS,
+                successMessage: 'You have been logged out'
             });
         } catch (error) {
             dispatch({
@@ -59,13 +61,5 @@ export function logout() {
                 payload: getErrorMessage(error)
             });
         }
-    }
-}
-
-// MISC
-
-export const clearMessages = () => {
-    return {
-        type: types.CLEAR_MESSAGES
     }
 }
