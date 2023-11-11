@@ -34,7 +34,6 @@ function LoginForm({ onSubmit, message }) {
           </form>
         )}
       />
-      {message && <p>{message}</p>}
     </div>
   );
 }

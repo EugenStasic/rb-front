@@ -2,7 +2,7 @@ import React from 'react';
 import { validateRegister } from '../../utils/utils';
 import { Form, Field } from 'react-final-form';
 
-function RegisterForm({ onSubmit, message }) {
+function RegisterForm({ onSubmit }) {
   return (
     <div>
       <h1>Register</h1>
@@ -67,7 +67,6 @@ function RegisterForm({ onSubmit, message }) {
                 Register
               </button>
             </div>
-            {message && <p>{message}</p>}
           </form>
         )}
       />

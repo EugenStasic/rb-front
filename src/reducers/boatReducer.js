@@ -80,11 +80,19 @@ const boatReducer = (state = initialState, action) => {
       };
 
     case types.EDIT_BOAT_LISTING_SUCCESS:
+      const updatedBoats = state.boats.map((boat) =>
+        boat._id === action.payload.boat._id ? action.payload.boat : boat
+      );
+      
+      let updatedCurrentBoat = state.currentBoat;
+      if (state.currentBoat && state.currentBoat._id === action.payload.boat._id) {
+        updatedCurrentBoat = action.payload.boat;
+      }
+      
       return {
         ...state,
-        boats: state.boats.map((boat) =>
-          boat._id === action.payload.boat._id ? action.payload.boat : boat
-        ),
+        boats: updatedBoats,
+        currentBoat: updatedCurrentBoat,
         successMessage: action.successMessage,
         loading: false
       };
