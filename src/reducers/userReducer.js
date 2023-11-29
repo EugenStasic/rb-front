@@ -78,7 +78,55 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload.error,
       };
+    
+    case types.ADD_USER_PROFILE_PICTURE_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
 
+    case types.ADD_USER_PROFILE_PICTURE_SUCCESS:
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          profilePic: action.payload
+        },
+        successMessage: action.successMessage,
+        loading: false
+      };
+    
+    case types.ADD_USER_PROFILE_PICTURE_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
+
+    case types.DELETE_USER_PROFILE_PICTURE_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case types.DELETE_USER_PROFILE_PICTURE_SUCCESS:
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          profilePic: null
+        },
+        successMessage: action.successMessage,
+        loading: false
+      };
+
+    case types.DELETE_USER_PROFILE_PICTURE_FAILURE:
+      return{
+        ...state,
+        error: action.payload.error,
+        loading: false
+      };
+      
     case CLEAR_MESSAGES:
       return {
         ...state,

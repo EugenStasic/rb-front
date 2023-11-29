@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UserInformationForm from '../../components/forms/UserInfo';
 import { updateUserInfo } from '../../actions/userActions';
+import UserProfilePic from '../../components/forms/UserProfilePic';
 
 const UserDash = () => {
     const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const UserDash = () => {
                 onSubmit={handleSubmit}
                 initialValues={userInfo}
             />
+            <UserProfilePic />
         </div>
     );
 };
