@@ -5,7 +5,8 @@ const initialState = {
   loading: false,
   userInfo: {},
   error: null,
-  successMessage: null
+  successMessage: null,
+  publicProfiles: {}
 };
 
 const userReducer = (state = initialState, action) => {
@@ -31,6 +32,30 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
+    
+    case types.FETCH_PUBLIC_USER_INFO_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case types.FETCH_PUBLIC_USER_INFO_SUCCESS:
+      return {
+        ...state,
+        publicProfiles: {
+          ...state.publicProfiles,
+          [action.userId]: action.payload
+        },
+        loading: false
+      };
+
+    case types.FETCH_PUBLIC_USER_INFO_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      }
+
 
     case types.UPDATE_USER_INFO_REQUEST:
       return {

@@ -83,21 +83,89 @@ const boatReducer = (state = initialState, action) => {
       const updatedBoats = state.boats.map((boat) =>
         boat._id === action.payload.boat._id ? action.payload.boat : boat
       );
-      
+
       let updatedCurrentBoat = state.currentBoat;
       if (state.currentBoat && state.currentBoat._id === action.payload.boat._id) {
         updatedCurrentBoat = action.payload.boat;
       }
-      
+
       return {
         ...state,
         boats: updatedBoats,
         currentBoat: updatedCurrentBoat,
         successMessage: action.successMessage,
-        loading: false
+        loading: false,
       };
 
     case types.EDIT_BOAT_LISTING_FAILURE:
+      return {
+        ...state,
+        error: action.payload.message,
+        loading: false,
+      };
+
+    case types.ADD_BOAT_IMAGES_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case types.ADD_BOAT_IMAGES_SUCCESS:
+      let updatedBoatsForImages = state.boats.map((boat) =>
+        boat._id === action.payload.boat._id ? { ...boat, images: action.payload.images } : boat
+      );
+
+      let updatedCurrentBoatForImages = state.currentBoat;
+      if (state.currentBoat && state.currentBoat._id === action.payload.boat._id) {
+        updatedCurrentBoatForImages = { ...state.currentBoat, images: action.payload.images };
+      }
+
+      return {
+        ...state,
+        boats: updatedBoatsForImages,
+        currentBoat: updatedCurrentBoatForImages,
+        successMessage: action.successMessage,
+        loading: false,
+      };
+
+    case types.ADD_BOAT_IMAGES_FAILURE:
+      return {
+        ...state,
+        error: action.payload.message,
+        loading: false,
+      };
+    case types.DELETE_BOAT_IMAGES_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case types.DELETE_BOAT_IMAGES_SUCCESS:
+      const updatedBoatsAfterDeletion = state.boats.map(boat => {
+        if (boat._id === action.payload.boatId) {
+          const newImages = [...boat.images];
+          newImages.splice(action.payload.imageIndex, 1);
+          return { ...boat, images: newImages };
+        }
+        return boat;
+      });
+
+      let updatedCurrentBoatAfterDeletion = { ...state.currentBoat };
+      if (state.currentBoat && state.currentBoat._id === action.payload.boatId) {
+        const newImages = [...state.currentBoat.images];
+        newImages.splice(action.payload.imageIndex, 1);
+        updatedCurrentBoatAfterDeletion = { ...state.currentBoat, images: newImages };
+      }
+
+      return {
+        ...state,
+        boats: updatedBoatsAfterDeletion,
+        currentBoat: updatedCurrentBoatAfterDeletion,
+        successMessage: action.successMessage,
+        loading: false,
+      };
+
+    case types.DELETE_BOAT_IMAGES_FAILURE:
       return {
         ...state,
         error: action.payload.message,
@@ -115,7 +183,7 @@ const boatReducer = (state = initialState, action) => {
         ...state,
         boats: state.boats.filter((boat) => boat._id !== action.payload),
         loading: false,
-        successMessage: action.successMessage
+        successMessage: action.successMessage,
       };
 
     case types.DELETE_BOAT_LISTING_FAILURE:
@@ -131,7 +199,7 @@ const boatReducer = (state = initialState, action) => {
         successMessage: null,
         error: null,
       };
-
+      
     default:
       return state;
   }

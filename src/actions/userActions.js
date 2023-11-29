@@ -1,5 +1,5 @@
 import * as types from './userTypes';
-import { fetchUserDetails, updateUserInformation } from '../services/users/userService';
+import { fetchPublicUserDetails, fetchUserDetails, updateUserInformation } from '../services/users/userService';
 import { getErrorMessage } from '../utils/utils';
 
 export const getUserInfo = () => async (dispatch) => {
@@ -36,5 +36,25 @@ export const updateUserInfo = (updateInfo) => async (dispatch) => {
             type: types.UPDATE_USER_INFO_FAILURE,
             payload: getErrorMessage(error)
         });
+    }
+};
+
+export const getPublicUserInfo = (userId) => async (dispatch) => {
+    dispatch({
+        type: types.FETCH_PUBLIC_USER_INFO_REQUEST
+    });
+
+    try {
+        const publicUser = await fetchPublicUserDetails(userId);
+        dispatch({
+            type: types.FETCH_PUBLIC_USER_INFO_SUCCESS,
+            payload: publicUser,
+            userId: userId
+        })
+    } catch (error) {
+        dispatch({
+            type: types.FETCH_PUBLIC_USER_INFO_FAILURE,
+            payload: getErrorMessage(error)
+        })
     }
 };

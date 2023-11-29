@@ -30,6 +30,7 @@ const MyBoats = () => {
                     boat={boat}
                     onEdit={() => handleEdit(boat._id)}
                     onDelete={() => handleDelete(boat._id)}
+                    imageUrl={`http://localhost:5000/boat/${boat._id}/images/0`}
                 />)}
         </div>
     );

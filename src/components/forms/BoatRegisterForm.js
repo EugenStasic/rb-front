@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import { validateBoatRegister } from '../../utils/utils';
 
 function BoatRegisterForm({ onSubmit }) {
+
+    const [files, setFiles] = useState([]);
+
+    const handleFileChange = (event) => {
+        setFiles([...event.target.files]);
+    };
+
+    const handleSubmit = async (values) => {
+        const formData = new FormData();
+        const dataToSubmit = {...values};
+        delete dataToSubmit.images; 
+        formData.append('data', JSON.stringify(dataToSubmit));
+    
+        files.forEach(file => {
+            formData.append('images', file);
+        });
+    
+        await onSubmit(formData);
+    };
+
     return (
         <div>
             <h1>Boat Registration</h1>
             <Form
-                onSubmit={onSubmit}
+                onSubmit={handleSubmit}
                 validate={validateBoatRegister}
                 render={({ handleSubmit, form, submitting, pristine, hasValidationErrors }) => (
                     <form onSubmit={handleSubmit}>
@@ -102,6 +122,15 @@ function BoatRegisterForm({ onSubmit }) {
                                 </div>
                             )}
                         </Field>
+
+                        <div>
+                            <label>Boat Images</label>
+                            <input 
+                                type="file" 
+                                multiple 
+                                onChange={handleFileChange}
+                            />
+                        </div>
 
                         <div className="buttons">
                             <button type="submit" disabled={submitting || pristine || hasValidationErrors}>

@@ -17,3 +17,12 @@ export const updateUserInformation = async (updateData) => {
         throw error;
     }
 };
+
+export const fetchPublicUserDetails = async (userId) => {
+    try {
+        const response = await api.get(`/user/${userId}`, userId);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};

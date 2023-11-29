@@ -12,6 +12,7 @@ import UserDash from './pages/userDasboard/userDash';
 import BoatRegister from './pages/userDasboard/boats/BoatRegister';
 import EditBoat from './pages/userDasboard/boats/EditBoat';
 import MyBoats from './pages/userDasboard/boats/MyBoats';
+import BoatAd from './pages/userDasboard/boats/BoatAd';
 import { clearMessages } from './actions/globalActions';
 import { getUserBoatsInfo } from './actions/boatActions';
 import { getUserInfo } from './actions/userActions';
@@ -51,6 +52,7 @@ function App() {
           <Route path="/my-boats" element={<MyBoats />} />
           <Route path="/registerboat" element={<BoatRegister />} />
           <Route path="/edit-boat/:boatId" element={<EditBoat />} />
+          <Route path="/boatad/:boatId" element={<BoatAd />} />
         </Routes>
       </Router>
     </Provider>

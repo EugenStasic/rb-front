@@ -1,4 +1,4 @@
-import { fetchUsersBoatsService, registerBoatService, deleteBoatListingService, updateBoatInformationService, fetchBoatService } from '../services/boat/boatService';
+import { fetchUsersBoatsService, registerBoatService, deleteBoatListingService, updateBoatInformationService, fetchBoatService, updateBoatImagesService, deleteBoatImageService } from '../services/boat/boatService';
 import { getErrorMessage } from '../utils/utils';
 import * as types from './boatTypes';
 
@@ -22,7 +22,7 @@ export function registerBoat(boatData) {
             });
         }
     }
-}
+};
 
 export function getBoatInfo(boatId) {
     return async function (dispatch) {
@@ -43,7 +43,7 @@ export function getBoatInfo(boatId) {
             })
         }
     }
-}
+};
 
 export function getUserBoatsInfo() {
     return async function (dispatch) {
@@ -65,7 +65,7 @@ export function getUserBoatsInfo() {
         }
     }
 
-}
+};
 
 export function updateBoatInformation(boatId, updateData) {
     return async function (dispatch) {
@@ -87,7 +87,50 @@ export function updateBoatInformation(boatId, updateData) {
             })
         }
     }
-}
+};
+
+export function updateBoatImages(boatId, formData) {
+    return async function (dispatch) {
+        dispatch({
+            type: types.ADD_BOAT_IMAGES_REQUEST,
+        })
+
+        try {
+            const updatedBoatImages = await updateBoatImagesService(boatId, formData);
+            dispatch({
+                type: types.ADD_BOAT_IMAGES_SUCCESS,
+                payload: updatedBoatImages,
+                successMessage: "Boat images updated successfully!"
+            });
+        } catch (error) {
+            dispatch({
+                type: types.ADD_BOAT_IMAGES_FAILURE,
+                payload: getErrorMessage(error)
+            });
+        }
+    }
+};
+
+export function deleteBoatImages(boatId, imageIndex) {
+    return async function (dispatch) {
+        dispatch({
+            type: types.DELETE_BOAT_IMAGES_REQUEST
+        })
+        try {
+            await deleteBoatImageService(boatId, imageIndex)
+            dispatch({
+                type: types.DELETE_BOAT_IMAGES_SUCCESS,
+                payload: { boatId, imageIndex},
+                successMessage: "Image deleted successfully!"
+            })
+        } catch (error) {
+            dispatch({
+                type: types.DELETE_BOAT_IMAGES_FAILURE,
+                payload: getErrorMessage(error)
+            })
+        }
+    }
+};
 
 export function deleteBoatListing(boatId) {
     return async function (dispatch) {
@@ -109,4 +152,4 @@ export function deleteBoatListing(boatId) {
             });
         }
     }
-}
+};

@@ -5,6 +5,7 @@ import PricingInfoForm from './boateditforms/PricingInfoForm';
 import BookingInfoForm from './boateditforms/BookingInfoForm';
 import EquipmentInfoForm from './boateditforms/EquipmentInfoForm';
 import ExtrasInfoForm from './boateditforms/ExtrasInfoForm';
+import BoatImagesForm from './boateditforms/boatImagesForm';
 
 const BoatEditForm = ({
   onGeneralInfoSubmit,
@@ -13,6 +14,7 @@ const BoatEditForm = ({
   onBookingInfoSubmit,
   onEquipmentInfoSubmit,
   onExtrasInfoSubmit,
+  onImagesSubmit,
   initialValues,
 }) => {
 
@@ -42,6 +44,10 @@ const BoatEditForm = ({
             <ExtrasInfoForm
                 onSubmit={onExtrasInfoSubmit}
                 initialValues={initialValues.extras}
+            />
+            <BoatImagesForm
+                onSubmit={onImagesSubmit}
+                existingImages={initialValues.images || []}
             />
         </div>
     );

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBoatInfo, updateBoatInformation } from '../../../actions/boatActions';
+import { getBoatInfo, updateBoatInformation, updateBoatImages } from '../../../actions/boatActions';
 import BoatEditForm from '../../../components/forms/BoatEditForm';
 import { useParams } from 'react-router';
 
@@ -37,6 +37,16 @@ const EditBoat = () => {
        await dispatch(updateBoatInformation(boatId, { extras: extrasInfo }));
     };
 
+    const handleImagesUpdate = async (newImages) => {
+        const formData = new FormData();
+    
+        newImages.forEach(image => formData.append('images', image));
+        console.log('FormData for update:', formData);
+        await dispatch(updateBoatImages(boatId, formData));
+        
+        dispatch(getBoatInfo(boatId));
+    };
+
     if (loading || !currentBoat) {
         return <div>Loading...</div>;
     }
@@ -50,6 +60,7 @@ const EditBoat = () => {
                 onBookingInfoSubmit={handleBookingInfoUpdate}
                 onEquipmentInfoSubmit={handleEquipmentInfoUpdate}
                 onExtrasInfoSubmit={handleExtrasInfoUpdate}
+                onImagesSubmit={handleImagesUpdate}
                 initialValues={currentBoat}
             />
         </div>

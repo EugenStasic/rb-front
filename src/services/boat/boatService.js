@@ -36,6 +36,30 @@ export const updateBoatInformationService = async (boatId, updateData) => {
     }
 };
 
+export const updateBoatImagesService = async (boatId, newImages) => {
+    try {
+        const formData = new FormData();
+
+        newImages.forEach(image => {
+            formData.append('images', image);
+        });
+
+        const response = await api.patch(`/boat/user-boats/${boatId}/images`, formData);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const deleteBoatImageService = async (boatId, imageIndex) => {
+    try {
+        const response = await api.delete(`/boat/user-boats/${boatId}/images/${imageIndex}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const deleteBoatListingService = async (boatId) => {
     try {
         const response = await api.delete(`/boat/user-boats/${boatId}`);
