@@ -25,6 +25,9 @@ function NavBar() {
                     <Link to="/userwelcome">
                     <button>Home</button>
                     </Link>
+                    <Link to="/search">
+                    <button>SEARCH</button>
+                    </Link>
                     <button>Profile</button>
                     {showDropdown && (
                         <div className="dropdown-menu">

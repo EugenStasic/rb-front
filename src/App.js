@@ -17,6 +17,7 @@ import { clearMessages } from './actions/globalActions';
 import { getUserBoatsInfo } from './actions/boatActions';
 import { getUserInfo } from './actions/userActions';
 import DisplayMessage from './utils/DisplayMessage';
+import SearchPage from './pages/browsing/SearchPage';
 
 const RouteChangesWatcher = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ function App() {
           <Route path="/registerboat" element={<BoatRegister />} />
           <Route path="/edit-boat/:boatId" element={<EditBoat />} />
           <Route path="/boatad/:boatId" element={<BoatAd />} />
+          <Route path="/search" element={<SearchPage />} />
         </Routes>
       </Router>
     </Provider>
