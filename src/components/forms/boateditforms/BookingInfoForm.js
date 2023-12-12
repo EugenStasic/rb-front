@@ -16,11 +16,32 @@ function BookingInfoForm({ onSubmit, initialValues }) {
                     <form onSubmit={handleSubmit}>
                         <div>
                             <label>Check-In Time</label>
-                            <Field name="checkInTime" component="input" placeholder="Check-In Time" />
+                            <Field name="checkInTime" component="select">
+                                <option value="">Select Check-In Time</option>
+                                <option value="06:00 AM">06:00 AM</option>
+                                <option value="07:00 AM">07:00 AM</option>
+                                <option value="08:00 AM">08:00 AM</option>
+                                <option value="09:00 AM">09:00 AM</option>
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="12:00 PM">12:00 PM</option>
+                            </Field>
                         </div>
                         <div>
                             <label>Check-Out Time</label>
-                            <Field name="checkOutTime" component="input" placeholder="Check-Out Time" />
+                            <Field name="checkOutTime" component="select">
+                                <option value="">Select Check-Out Time</option>
+                                <option value="12:00 PM">12:00 PM</option>
+                                <option value="01:00 PM">01:00 PM</option>
+                                <option value="02:00 PM">02:00 PM</option>
+                                <option value="03:00 PM">03:00 PM</option>
+                                <option value="04:00 PM">04:00 PM</option>
+                                <option value="05:00 PM">05:00 PM</option>
+                                <option value="06:00 PM">06:00 PM</option>
+                                <option value="07:00 PM">07:00 PM</option>
+                                <option value="08:00 PM">08:00 PM</option>
+                                <option value="09:00 PM">09:00 PM</option>
+                            </Field>
                         </div>
                         <div>
                             <label>Boat License Requirement</label>

@@ -1,4 +1,5 @@
 import * as types from '../actions/boatTypes';
+import * as reviewTypes from '../actions/reviewTypes';
 import { CLEAR_MESSAGES } from '../actions/globalTypes';
 
 const initialState = {
@@ -80,7 +81,7 @@ const boatReducer = (state = initialState, action) => {
       };
 
     case types.EDIT_BOAT_LISTING_SUCCESS:
-      const updatedBoats = state.boats.map((boat) =>
+      const updatedBoats = state.boats.map(boat =>
         boat._id === action.payload.boat._id ? action.payload.boat : boat
       );
 
@@ -111,7 +112,7 @@ const boatReducer = (state = initialState, action) => {
       };
 
     case types.ADD_BOAT_IMAGES_SUCCESS:
-      let updatedBoatsForImages = state.boats.map((boat) =>
+      let updatedBoatsForImages = state.boats.map(boat =>
         boat._id === action.payload.boat._id ? { ...boat, images: action.payload.images } : boat
       );
 
@@ -134,6 +135,7 @@ const boatReducer = (state = initialState, action) => {
         error: action.payload.message,
         loading: false,
       };
+
     case types.DELETE_BOAT_IMAGES_REQUEST:
       return {
         ...state,
@@ -181,7 +183,7 @@ const boatReducer = (state = initialState, action) => {
     case types.DELETE_BOAT_LISTING_SUCCESS:
       return {
         ...state,
-        boats: state.boats.filter((boat) => boat._id !== action.payload),
+        boats: state.boats.filter(boat => boat._id !== action.payload),
         loading: false,
         successMessage: action.successMessage,
       };
@@ -199,7 +201,27 @@ const boatReducer = (state = initialState, action) => {
         successMessage: null,
         error: null,
       };
-      
+
+    case reviewTypes.SUBMIT_REVIEW_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case reviewTypes.SUBMIT_REVIEW_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        successMessage: action.successMessage
+      };
+
+    case reviewTypes.SUBMIT_REVIEW_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        loading: false,
+      };
+
     default:
       return state;
   }

@@ -4,13 +4,14 @@ import { useParams } from 'react-router';
 import { getBoatInfo } from '../../../actions/boatActions';
 import BoatHeader from '../../../components/boatad/BoatHeader';
 import BoatDetails from '../../../components/boatad/BoatDetails';
-import { getPublicUserInfo } from '../../../actions/userActions';
+import { getPublicUserInfo, getUserInfo } from '../../../actions/userActions';
+import BookingForm from '../../../components/forms/booking/BookingForm';
 
 const BoatAd = () => {
     const { boatId } = useParams();
     const dispatch = useDispatch();
     const { currentBoat, loading: loadingBoat } = useSelector(state => state.boat);
-    const { publicProfiles, loading: loadingUser } = useSelector(state => state.user);
+    const { publicProfiles, userInfo, loading: loadingUser } = useSelector(state => state.user);
 
     useEffect(() => {
         if (boatId) {
@@ -20,15 +21,17 @@ const BoatAd = () => {
 
     useEffect(() => {
         if (currentBoat && currentBoat.ownerId && !publicProfiles[currentBoat.ownerId] && !loadingUser) {
+            dispatch(getUserInfo());
             dispatch(getPublicUserInfo(currentBoat.ownerId));
         }
     }, [dispatch, currentBoat, publicProfiles, loadingUser]);
 
-    if (loadingBoat || !currentBoat || loadingUser || !publicProfiles[currentBoat?.ownerId]) {
+    if (loadingBoat || !currentBoat || loadingUser || !userInfo || !publicProfiles[currentBoat?.ownerId]) {
         return <div>Loading...</div>;
     }
 
     const ownerData = publicProfiles[currentBoat.ownerId];
+    const renterData = userInfo;
 
     return (
         <div>
@@ -42,6 +45,9 @@ const BoatAd = () => {
               }} 
               ownerData={ownerData || { firstName: 'UNKNOWN' }} 
             />
+            {currentBoat && ownerData && renterData && (
+                <BookingForm boatData={currentBoat} ownerData={ownerData} renterData={renterData} />
+            )}
         </div>
     )
 }

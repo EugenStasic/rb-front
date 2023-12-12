@@ -33,6 +33,7 @@ function NavBar() {
                         <div className="dropdown-menu">
                             <Link to='/userdash'>User Dashboard</Link>
                             <Link to='/my-boats'>My Boats</Link>
+                            <Link to='/my-bookings'>My Bookings</Link>
                             <Link to='/registerboat'>Register a Boat</Link>
                             <button onClick={handleLogout}>Logout</button>
                         </div>

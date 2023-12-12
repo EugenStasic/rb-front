@@ -18,6 +18,8 @@ import { getUserBoatsInfo } from './actions/boatActions';
 import { getUserInfo } from './actions/userActions';
 import DisplayMessage from './utils/DisplayMessage';
 import SearchPage from './pages/browsing/SearchPage';
+import MyBookings from './pages/userDasboard/MyBookingsPage';
+import MyBoatsBookingPage from './pages/userDasboard/boats/MyBoatsBookingsPage';
 
 const RouteChangesWatcher = () => {
   const dispatch = useDispatch();
@@ -51,6 +53,8 @@ function App() {
           <Route path="/userwelcome" element={<UserWelcome />} />
           <Route path="/userdash" element={<UserDash />} />
           <Route path="/my-boats" element={<MyBoats />} />
+          <Route path="/my-boat-bookings" element={<MyBoatsBookingPage />} />
+          <Route path="/my-bookings" element={<MyBookings />} />
           <Route path="/registerboat" element={<BoatRegister />} />
           <Route path="/edit-boat/:boatId" element={<EditBoat />} />
           <Route path="/boatad/:boatId" element={<BoatAd />} />
