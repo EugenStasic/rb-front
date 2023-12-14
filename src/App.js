@@ -20,6 +20,7 @@ import DisplayMessage from './utils/DisplayMessage';
 import SearchPage from './pages/browsing/SearchPage';
 import MyBookings from './pages/userDasboard/MyBookingsPage';
 import MyBoatsBookingPage from './pages/userDasboard/boats/MyBoatsBookingsPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RouteChangesWatcher = () => {
   const dispatch = useDispatch();

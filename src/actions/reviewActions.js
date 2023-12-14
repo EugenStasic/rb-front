@@ -1,5 +1,5 @@
 import * as types from '../actions/reviewTypes';
-import { submitReviewService } from '../services/review/reviewService';
+import { fetchReviewsService, submitReviewService } from '../services/review/reviewService';
 import { getErrorMessage } from '../utils/utils';
 
 export const submitReview = (boatId, rating, comment) => {
@@ -22,3 +22,25 @@ export const submitReview = (boatId, rating, comment) => {
         }
     };
 };
+
+export const fetchReview = (boatId) => {
+    return async (dispatch) => {
+        dispatch({
+            type: types.FETCH_REVIEW_REQUEST
+        });
+    
+    try {
+        const reviews = await fetchReviewsService(boatId);
+        dispatch({
+            type: types.FETCH_REVIEW_SUCCESS,
+            payload: reviews,
+            successMessage: "Reviews fetched successfully!"
+        });
+    } catch (error) {
+        dispatch({
+            type: types.FETCH_REVIEW_FAILURE,
+            error: getErrorMessage(error)
+        });
+    }
+    }
+}

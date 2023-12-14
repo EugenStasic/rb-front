@@ -22,3 +22,12 @@ export const checkIfReviewedService = async (boatId) => {
         throw error;
     }
 };
+
+export const fetchReviewsService = async (boatId) => {
+    try {
+        const response = await api.get(`/review/${boatId}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};

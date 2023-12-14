@@ -1,58 +1,63 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { logout } from '../../actions/authActions';
 
 function NavBar() {
     const isAuthenticated = useSelector(state => !!state.auth.token);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const [showDropdown, setShowDropdown] = useState(false);
-
     const handleLogout = () => {
         dispatch(logout());
-        navigate('/');
     };
 
     return (
-        <div className="navBar">
-            {isAuthenticated ? (
-                <div 
-                    onMouseEnter={() => setShowDropdown(true)}
-                    onMouseLeave={() => setShowDropdown(false)}
-                >
-                    <Link to="/userwelcome">
-                    <button>Home</button>
-                    </Link>
-                    <Link to="/search">
-                    <button>SEARCH</button>
-                    </Link>
-                    <button>Profile</button>
-                    {showDropdown && (
-                        <div className="dropdown-menu">
-                            <Link to='/userdash'>User Dashboard</Link>
-                            <Link to='/my-boats'>My Boats</Link>
-                            <Link to='/my-bookings'>My Bookings</Link>
-                            <Link to='/registerboat'>Register a Boat</Link>
-                            <button onClick={handleLogout}>Logout</button>
-                        </div>
+        <Navbar bg="light" expand="lg">
+            <Navbar.Brand href="/">Rent a Boat</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
+                    {isAuthenticated ? (
+                        <>
+                            <LinkContainer to="/userwelcome">
+                                <Nav.Link>Home</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to="/search">
+                                <Nav.Link>SEARCH</Nav.Link>
+                            </LinkContainer>
+                            <NavDropdown title="Profile" id="basic-nav-dropdown">
+                                <LinkContainer to="/userdash">
+                                    <NavDropdown.Item>User Dashboard</NavDropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/my-boats">
+                                    <NavDropdown.Item>My Boats</NavDropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/my-bookings">
+                                    <NavDropdown.Item>My Bookings</NavDropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/registerboat">
+                                    <NavDropdown.Item>Register a Boat</NavDropdown.Item>
+                                </LinkContainer>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                            </NavDropdown>
+                        </>
+                    ) : (
+                        <>
+                            <LinkContainer to="/">
+                                <Nav.Link>Home</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to="/register">
+                                <Nav.Link>Register</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to="/login">
+                                <Nav.Link>Login</Nav.Link>
+                            </LinkContainer>
+                        </>
                     )}
-                </div>
-            ) : (
-                <>
-                    <Link to="/">
-                    <button>Home</button>
-                    </Link>
-                    <Link to='/register'>
-                        <button>Register</button>
-                    </Link>
-                    <Link to='/login'>
-                        <button>Login</button>
-                    </Link>
-                </>
-            )}
-        </div>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
     );
 }
 
