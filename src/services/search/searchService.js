@@ -19,6 +19,21 @@ export const fetchBoatsService = async (filters = {}) => {
             params.append('location', filters.location);
         }
 
+        if (filters.type) {
+            params.append('type', filters.type);
+        }
+        if (filters.engineType) {
+            params.append('engineType', filters.engineType);
+        }
+        if (filters.availability) {
+            if (filters.availability.startDate) {
+                params.append('availability.startDate', filters.availability.startDate);
+            }
+            if (filters.availability.endDate) {
+                params.append('availability.endDate', filters.availability.endDate);
+            }
+        }
+
         const response = await api.get(`/search/search`, { params: Object.fromEntries(params) });
         return response.data;
     } catch (error) {

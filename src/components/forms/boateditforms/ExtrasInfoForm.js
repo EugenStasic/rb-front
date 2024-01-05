@@ -9,34 +9,37 @@ function ExtrasInfoForm({ onSubmit, initialValues }) {
     };
 
     return (
-        <div>
-            <h2>Edit Extras Information</h2>
+        <div className="container mt-4">
+            <h2 className="mb-3">Edit Extras Information</h2>
             <Form
                 initialValues={{ extras: initialValues }}
                 onSubmit={handleFormSubmit}
                 mutators={{ ...arrayMutators }}
                 render={({ handleSubmit, form, submitting, pristine, values }) => (
                     <form onSubmit={handleSubmit}>
-                        <div>
-                            <label>Extras</label>
+                        <div className="mb-3">
+                            <label className="form-label">Extras</label>
                             <FieldArray name="extras">
                                 {({ fields }) => (
                                     <>
                                         {fields.map((name, index) => (
-                                            <div key={name}>
+                                            <div key={name} className="mb-2">
                                                 <Field
                                                     name={`${name}.option`}
                                                     component="input"
                                                     placeholder="Extra Option"
+                                                    className="form-control me-2"
                                                 />
                                                 <Field
                                                     name={`${name}.pricePerDay`}
                                                     component="input"
                                                     type="number"
                                                     placeholder="Price Per Day"
+                                                    className="form-control me-2"
                                                 />
                                                 <button
                                                     type="button"
+                                                    className="btn btn-danger me-2"
                                                     onClick={() => fields.remove(index)}
                                                 >
                                                     Remove
@@ -45,6 +48,7 @@ function ExtrasInfoForm({ onSubmit, initialValues }) {
                                         ))}
                                         <button
                                             type="button"
+                                            className="btn btn-secondary mb-2"
                                             onClick={() => fields.push({ option: '', pricePerDay: '' })}
                                         >
                                             Add Extra
@@ -53,8 +57,8 @@ function ExtrasInfoForm({ onSubmit, initialValues }) {
                                 )}
                             </FieldArray>
                         </div>
-                        <div>
-                            <button type="submit" disabled={submitting || pristine}>
+                        <div className="d-grid gap-2">
+                            <button type="submit" className="btn btn-primary" disabled={submitting || pristine}>
                                 Save Changes
                             </button>
                         </div>

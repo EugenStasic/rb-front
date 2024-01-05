@@ -18,18 +18,25 @@ const SearchPage = () => {
     };
 
     return (
-        <div>
-            <FilterBar onFilterChange={handleFilterChange} />
-            {loading && <p>Loading boats...</p>}
-            {error && <p>Error loading boats: {error}</p>}
-            <div className="boat-cards-container">
-                {boats && boats.map(boat => (
-                    <BoatCard 
-                        key={boat._id} 
-                        boat={boat} 
-                        imageUrl={`http://localhost:5000/boat/${boat._id}/images/0`|| defaultImage }
-                    />
-                ))}
+        <div className="container-fluid">
+            <div className="row">
+                <div className="sidebar" style={{ backgroundColor: '#ecf0f1' }}>
+                    <FilterBar onFilterChange={handleFilterChange} />
+                </div>
+                <div className="col-md-9" style={{ paddingLeft: '12vh', paddingTop: '2vh'}}>
+                    {loading && <p>Loading boats...</p>}
+                    {error && <p>Error loading boats: {error}</p>}
+                    <div className="row">
+                        {boats && boats.map(boat => (
+                            <div key={boat._id} className="col-md-3 mb-3">
+                                <BoatCard 
+                                    boat={boat} 
+                                    imageUrl={`http://localhost:5000/boat/${boat._id}/images/0`|| defaultImage }
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -21,6 +21,7 @@ import SearchPage from './pages/browsing/SearchPage';
 import MyBookings from './pages/userDasboard/MyBookingsPage';
 import MyBoatsBookingPage from './pages/userDasboard/boats/MyBoatsBookingsPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Footer from './components/common/Footer';
 
 const RouteChangesWatcher = () => {
   const dispatch = useDispatch();
@@ -41,6 +42,13 @@ const RouteChangesWatcher = () => {
 };
 
 function App() {
+  const FooterWithRouter = () => {
+    const location = useLocation();
+    const showFooter = ['/', '/userwelcome', '/userdash', '/login', '/register'].includes(location.pathname);
+
+    return showFooter ? <Footer /> : null;
+  };
+
   return (
     <Provider store={store}>
       <Router>
@@ -61,6 +69,7 @@ function App() {
           <Route path="/boatad/:boatId" element={<BoatAd />} />
           <Route path="/search" element={<SearchPage />} />
         </Routes>
+        <FooterWithRouter />
       </Router>
     </Provider>
   );

@@ -1,0 +1,41 @@
+.custom-style {
+    justify-content: right;
+    width: 140%;
+    padding-right: 35%;
+}
+
+.boat-details {
+    width: 130%;
+}
+
+.card-header {
+    background-color: #f7f7f7;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-title {
+    color: #007bff;
+}
+
+.card-text {
+    padding-bottom: 1rem;
+}
+
+.list-group-item {
+    border: none;
+    padding: 0.5rem 1rem;
+}
+
+.list-group-item.equipment-title {
+    background-color: #f7f7f7;
+    font-weight: bold;
+    padding-top: 1rem;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    margin: 20px 0;
+}

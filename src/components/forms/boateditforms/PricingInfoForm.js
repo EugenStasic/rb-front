@@ -24,26 +24,27 @@ function PricingInfoForm({ onSubmit, initialValues }) {
     };
 
     return (
-        <div>
-            <h2>Edit Pricing Information</h2>
+        <div className="container mt-4">
+            <h2 className="mb-3">Edit Pricing Information</h2>
             <Form
                 initialValues={formattedInitialValues}
                 onSubmit={handleFormSubmit}
                 mutators={{ ...arrayMutators }}
                 render={({ handleSubmit, form, submitting, pristine, values }) => (
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <label>Reference Price</label>
+                    <form onSubmit={handleSubmit} noValidate>
+                        <div className="mb-3">
+                            <label className="form-label">Reference Price</label>
                             <Field 
                                 name="referencePrice" 
                                 component="input" 
                                 type="number" 
                                 placeholder="Reference Price" 
+                                className="form-control"
                             />
                         </div>
-                        <div>
-                            <label>Minimum Charter Period</label>
-                            <Field name="minCharterPeriod" component="select">
+                        <div className="mb-3">
+                            <label className="form-label">Minimum Charter Period</label>
+                            <Field name="minCharterPeriod" component="select" className="form-select">
                                 <option value="">Select Minimum Charter Period</option>
                                 <option value="half-day">Half-Day</option>
                                 <option value="1 Day">1 Day</option>
@@ -55,52 +56,60 @@ function PricingInfoForm({ onSubmit, initialValues }) {
                                 <option value="7 Days">7 Days</option>
                             </Field>
                         </div>
-                        <div>
-                            <label>Price Periods</label>
+                        <div className="mb-3">
+                            <label className="form-label">Price Periods</label>
                             <FieldArray name="pricePeriods">
                                 {({ fields }) => (
                                     <>
                                         {fields.map((name, index) => (
-                                            <div key={name}>
+                                            <div key={name} className="mb-2 d-flex align-items-center">
                                                 <Field 
                                                     name={`${name}.fromDate`} 
                                                     component="input" 
                                                     type="date" 
                                                     placeholder="From Date" 
+                                                    className="form-control me-2"
                                                 />
                                                 <Field 
                                                     name={`${name}.toDate`} 
                                                     component="input" 
                                                     type="date" 
                                                     placeholder="To Date" 
+                                                    className="form-control me-2"
                                                 />
                                                 <Field 
                                                     name={`${name}.price`} 
                                                     component="input" 
                                                     type="number" 
                                                     placeholder="Price" 
+                                                    className="form-control me-2"
                                                 />
                                                 <button 
                                                     type="button" 
+                                                    className="btn btn-danger"
                                                     onClick={() => fields.remove(index)}
                                                 >
                                                     Remove
                                                 </button>
                                             </div>
                                         ))}
-                                        <button 
-                                            type="button" 
-                                            onClick={() => fields.push({ fromDate: '', toDate: '', price: '' })}
-                                        >
-                                            Add Price Period
-                                        </button>
+                                        <div className="mt-2">
+                                            <button 
+                                                type="button" 
+                                                className="btn btn-secondary"
+                                                onClick={() => fields.push({ fromDate: '', toDate: '', price: '' })}
+                                            >
+                                                Add Price Period
+                                            </button>
+                                        </div>
                                     </>
                                 )}
                             </FieldArray>
                         </div>
-                        <div>
+                        <div className="d-grid gap-2 mt-3">
                             <button 
                                 type="submit" 
+                                className="btn btn-primary" 
                                 disabled={submitting || pristine}
                             >
                                 Save Changes
@@ -110,7 +119,7 @@ function PricingInfoForm({ onSubmit, initialValues }) {
                 )}
             />
         </div>
-    );
+    );    
 }
 
 export default PricingInfoForm;

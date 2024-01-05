@@ -1,0 +1,19 @@
+.stars {
+    display: inline-block;
+}
+
+.star {
+    color: grey;
+    margin-right: 0.25rem;
+    cursor: pointer;
+}
+
+.star:hover,
+.star:hover~.star,
+.star.active {
+    color: gold;
+}
+
+.star.filled {
+    color: gold;
+}

@@ -1,0 +1,112 @@
+.sidebar {
+    background: #ecf0f1;
+    width: 250px !important;
+}
+
+.form-range::-webkit-slider-thumb {
+    background-color: #007bff;
+    border: none;
+}
+
+.form-range::-webkit-slider-runnable-track {
+    background-color: #dee2e6;
+}
+
+.form-range {
+    width: 100%;
+    height: 1px;
+}
+
+.form-range:focus {
+    outline: none;
+}
+
+.form-range::-moz-range-thumb {
+    background-color: #007bff;
+    border: none;
+}
+
+.form-range::-moz-range-track {
+    background-color: #dee2e6;
+}
+
+.form-range::-ms-thumb {
+    background-color: #007bff;
+    border: none;
+}
+
+.form-range::-ms-track {
+    background-color: #dee2e6;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+    border-color: #4e555b;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show>.btn-primary.dropdown-toggle {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.btn-primary:focus,
+.btn-secondary:focus,
+.btn-primary:active,
+.btn-secondary:active,
+.btn-primary.active,
+.btn-secondary.active,
+.btn-primary:active:focus,
+.btn-secondary:active:focus {
+    box-shadow: none;
+}
+
+.react-range-track {
+    background-color: transparent;
+    height: 6px;
+    width: 100%;
+    position: relative;
+}
+
+.react-range-track-background {
+    background-color: #dee2e6;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 3px;
+}
+
+.react-range-track-active {
+    background-color: #007bff;
+    height: 100%;
+    position: absolute;
+    border-radius: 3px;
+}
+
+.react-range-thumb {
+    background-color: #007bff;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+}

@@ -9,7 +9,7 @@ const DisplayMessage = () => {
     
     return (
         <>
-            {error && <div className='error'>{error}</div>}
+            {error && <div className='error'>{error.message || 'An error occurred'}</div>}
             {successMessage && <div className='successMessage'>{successMessage}</div>}
         </>
     )

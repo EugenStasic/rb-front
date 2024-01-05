@@ -1,49 +1,49 @@
 import React from 'react';
 import { Form, Field } from 'react-final-form';
 
-function TechnicalInfoForm({ onSubmit, initialValues }) {
+function TechnicalBoatInfoForm({ onSubmit, initialValues }) {
     const handleFormSubmit = (values) => {
         onSubmit(values);
     };
 
     return (
-        <div>
-            <h2>Edit Technical Boat Information</h2>
+        <div className="container mt-4">
+            <h2 className="mb-3">Edit Technical Boat Information</h2>
             <Form
                 initialValues={initialValues}
                 onSubmit={handleFormSubmit}
                 render={({ handleSubmit, form, submitting, pristine, values }) => (
                     <form onSubmit={handleSubmit}>
-                        <div>
-                            <label>Boat Length</label>
-                            <Field name="boatLength" component="input" type="number" placeholder="Boat Length" />
+                        <div className="mb-3">
+                            <label className="form-label">Boat Length</label>
+                            <Field name="boatLength" component="input" type="number" placeholder="Boat Length" className="form-control" />
                         </div>
-                        <div>
-                            <label>Onboard Capacity</label>
-                            <Field name="onboardCapacity" component="input" type="number" placeholder="Onboard Capacity" />
+                        <div className="mb-3">
+                            <label className="form-label">Onboard Capacity</label>
+                            <Field name="onboardCapacity" component="input" type="number" placeholder="Onboard Capacity" className="form-control" />
                         </div>
-                        <div>
-                            <label>Engine Type</label>
-                            <Field name="engineType" component="select">
+                        <div className="mb-3">
+                            <label className="form-label">Engine Type</label>
+                            <Field name="engineType" component="select" className="form-select">
                                 <option value="">Select Engine Type</option>
                                 <option value="Inboard">Inboard</option>
                                 <option value="Outboard">Outboard</option>
                             </Field>
                         </div>
-                        <div>
-                            <label>Engine Power</label>
-                            <Field name="enginePower" component="input" type="number" placeholder="Engine Power" />
+                        <div className="mb-3">
+                            <label className="form-label">Engine Power</label>
+                            <Field name="enginePower" component="input" type="number" placeholder="Engine Power" className="form-control" />
                         </div>
-                        <div>
-                            <label>Average Fuel Consumption</label>
-                            <Field name="avgFuelConsumption" component="input" type="number" placeholder="Avg Fuel Consumption" />
+                        <div className="mb-3">
+                            <label className="form-label">Average Fuel Consumption</label>
+                            <Field name="avgFuelConsumption" component="input" type="number" placeholder="Avg Fuel Consumption" className="form-control" />
                         </div>
-                        <div>
-                            <label>Year of Construction</label>
-                            <Field name="yearOfConstruction" component="input" type="number" placeholder="Year of Construction" />
+                        <div className="mb-3">
+                            <label className="form-label">Year of Construction</label>
+                            <Field name="yearOfConstruction" component="input" type="number" placeholder="Year of Construction" className="form-control" />
                         </div>
-                        <div>
-                            <button type="submit" disabled={submitting || pristine}>
+                        <div className="d-grid gap-2">
+                            <button type="submit" className="btn btn-primary" disabled={submitting || pristine}>
                                 Save Changes
                             </button>
                         </div>
@@ -54,4 +54,4 @@ function TechnicalInfoForm({ onSubmit, initialValues }) {
     );
 }
 
-export default TechnicalInfoForm;
+export default TechnicalBoatInfoForm;

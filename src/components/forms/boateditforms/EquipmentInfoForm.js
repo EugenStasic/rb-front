@@ -23,67 +23,76 @@ function EquipmentInfoForm({ onSubmit, initialValues }) {
     const initialWaterSportsValues = createInitialCheckboxValues(['Water skis', 'Wakeboard', 'Towable Tube'], initialValues.waterSportsEquipment);
 
     return (
-        <div>
-            <h2>Edit Equipment Information</h2>
-            <Form
-                initialValues={{
-                    navigationEquipment: initialNavigationValues,
-                    boatEquipment: initialBoatValues,
-                    waterSportsEquipment: initialWaterSportsValues
-                }}
+        <div className="container mt-4">
+            <h2 className="mb-3">Edit Equipment Information</h2>
+                                <Form
+                    initialValues={{
+                        navigationEquipment: initialNavigationValues,
+                        boatEquipment: initialBoatValues,
+                        waterSportsEquipment: initialWaterSportsValues
+                    }}
                 onSubmit={handleFormSubmit}
                 render={({ handleSubmit, form, submitting, pristine, values }) => (
                     <form onSubmit={handleSubmit}>
                         {/* NAVIGATION EQUIPMENT */}
-                        <div>
-                            <label>Navigation Equipment</label>
+                        <div className="mb-3">
+                            <label className="form-label">Navigation Equipment</label>
                             {Object.keys(initialNavigationValues).map(item => (
-                                <div key={item}>
-                                    <label>
-                                        <Field
-                                            name={`navigationEquipment.${item}`}
-                                            component="input"
-                                            type="checkbox"
-                                        /> {item}
+                                <div key={item} className="form-check">
+                                    <Field
+                                        name={`navigationEquipment.${item}`}
+                                        component="input"
+                                        type="checkbox"
+                                        className="form-check-input"
+                                        id={`navigation-${item}`}
+                                    />
+                                    <label className="form-check-label" htmlFor={`navigation-${item}`}>
+                                        {item}
                                     </label>
                                 </div>
                             ))}
                         </div>
 
                         {/* BOAT EQUIPMENT */}
-                        <div>
-                            <label>Boat Equipment</label>
+                        <div className="mb-3">
+                            <label className="form-label">Boat Equipment</label>
                             {Object.keys(initialBoatValues).map(item => (
-                                <div key={item}>
-                                    <label>
-                                        <Field
-                                            name={`boatEquipment.${item}`}
-                                            component="input"
-                                            type="checkbox"
-                                        /> {item}
+                                <div key={item} className="form-check">
+                                    <Field
+                                        name={`boatEquipment.${item}`}
+                                        component="input"
+                                        type="checkbox"
+                                        className="form-check-input"
+                                        id={`boat-${item}`}
+                                    />
+                                    <label className="form-check-label" htmlFor={`boat-${item}`}>
+                                        {item}
                                     </label>
                                 </div>
                             ))}
                         </div>
 
                         {/* WATER SPORTS EQUIPMENT */}
-                        <div>
-                            <label>Water Sports Equipment</label>
+                        <div className="mb-3">
+                            <label className="form-label">Water Sports Equipment</label>
                             {Object.keys(initialWaterSportsValues).map(item => (
-                                <div key={item}>
-                                    <label>
-                                        <Field
-                                            name={`waterSportsEquipment.${item}`}
-                                            component="input"
-                                            type="checkbox"
-                                        /> {item}
+                                <div key={item} className="form-check">
+                                    <Field
+                                        name={`waterSportsEquipment.${item}`}
+                                        component="input"
+                                        type="checkbox"
+                                        className="form-check-input"
+                                        id={`watersports-${item}`}
+                                    />
+                                    <label className="form-check-label" htmlFor={`watersports-${item}`}>
+                                        {item}
                                     </label>
                                 </div>
                             ))}
                         </div>
 
-                        <div>
-                            <button type="submit" disabled={submitting || pristine}>
+                        <div className="d-grid gap-2">
+                            <button type="submit" className="btn btn-primary" disabled={submitting || pristine}>
                                 Save Changes
                             </button>
                         </div>

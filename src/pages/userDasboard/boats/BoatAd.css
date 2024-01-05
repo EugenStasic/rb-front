@@ -1,0 +1,9 @@
+.boat-ad-container {
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.booking-form-col {
+    position: sticky;
+    z-index: 10;
+}

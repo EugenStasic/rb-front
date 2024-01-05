@@ -7,35 +7,35 @@ function GeneralInfoForm({ onSubmit, initialValues }) {
     };
 
     return (
-        <div>
-            <h2>Edit General Boat Information</h2>
+        <div className="container mt-4">
+            <h2 className="mb-3">Edit General Boat Information</h2>
             <Form
                 initialValues={initialValues}
                 onSubmit={handleFormSubmit}
                 render={({ handleSubmit, form, submitting, pristine, values }) => (
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <label>Manufacturer</label>
-                            <Field name="manufacturer" component="input" placeholder="Manufacturer" />
+                    <form onSubmit={handleSubmit} noValidate>
+                        <div className="mb-3">
+                            <label className="form-label">Manufacturer</label>
+                            <Field name="manufacturer" component="input" placeholder="Manufacturer" className="form-control" />
                         </div>
-                        <div>
-                            <label>Model</label>
-                            <Field name="model" component="input" placeholder="Model" />
+                        <div className="mb-3">
+                            <label className="form-label">Model</label>
+                            <Field name="model" component="input" placeholder="Model" className="form-control" />
                         </div>
-                        <div>
-                            <label>Postal Code</label>
-                            <Field name="cityHarbour.postalCode" component="input" placeholder="Postal Code" />
+                        <div className="mb-3">
+                            <label className="form-label">Postal Code</label>
+                            <Field name="cityHarbour.postalCode" component="input" placeholder="Postal Code" className="form-control" />
                         </div>
-                        <div>
-                            <label>City</label>
-                            <Field name="cityHarbour.city" component="input" placeholder="City" />
+                        <div className="mb-3">
+                            <label className="form-label">City</label>
+                            <Field name="cityHarbour.city" component="input" placeholder="City" className="form-control" />
                         </div>
-                        <div>
-                            <label>Description</label>
-                            <Field name="description" component="textarea" placeholder="Description" />
+                        <div className="mb-3">
+                            <label className="form-label">Description</label>
+                            <Field name="description" component="textarea" placeholder="Description" className="form-control" />
                         </div>
-                        <div>
-                            <button type="submit" disabled={submitting || pristine}>
+                        <div className="d-grid gap-2">
+                            <button type="submit" className="btn btn-primary" disabled={submitting || pristine}>
                                 Save Changes
                             </button>
                         </div>

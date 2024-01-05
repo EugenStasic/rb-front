@@ -1,33 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBooking } from '../../../actions/bookingActions';
+import { Card, Form, Button, ListGroup, Container, Row, Col } from 'react-bootstrap';
+import './BookingForm.css';
 
 const BookingForm = ({ boatData, ownerData, renterData }) => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [selectedExtras, setSelectedExtras] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [basePrice, setBasePrice] = useState(0);
+    const [extrasPrice, setExtrasPrice] = useState(0);
     const dispatch = useDispatch();
+    const [showExtras, setShowExtras] = useState(false);
 
     useEffect(() => {
         const calculateBasePrice = () => {
             const startDateObj = new Date(startDate);
             const endDateObj = new Date(endDate);
-            let basePrice = boatData.pricing.referencePrice;
+            let basePriceCalc = boatData.pricing.referencePrice;
         
             for (const period of boatData.pricing.pricePeriods) {
                 const periodStart = new Date(period.fromDate);
                 const periodEnd = new Date(period.toDate);
         
                 if (startDateObj <= periodEnd && endDateObj >= periodStart) {
-                    basePrice = period.price;
+                    basePriceCalc = period.price;
                     break;
                 }
             }
         
-            return basePrice;
+            return basePriceCalc;
         };
-
+    
         const calculateNumberOfDays = () => {
             const start = new Date(startDate);
             const end = new Date(endDate);
@@ -37,20 +42,27 @@ const BookingForm = ({ boatData, ownerData, renterData }) => {
     
         const numberOfDays = calculateNumberOfDays();
     
-        const basePrice = calculateBasePrice() * numberOfDays;
+        const basePriceCalc = calculateBasePrice() * numberOfDays;
         
-        const extrasPrice = selectedExtras.reduce((acc, extraId) => {
+        const extrasPriceCalc = selectedExtras.reduce((acc, extraId) => {
             const extra = boatData.extras.find(e => e._id === extraId);
             return extra ? acc + (Number(extra.pricePerDay) * numberOfDays) : acc;
         }, 0);
     
-        setTotalPrice(basePrice + extrasPrice);
+        setBasePrice(basePriceCalc);
+        setExtrasPrice(extrasPriceCalc);
+        setTotalPrice(basePriceCalc + extrasPriceCalc);
     }, [startDate, endDate, selectedExtras, boatData]);
 
-    const handleExtrasChange = (e) => {
-        const options = Array.from(e.target.selectedOptions, option => option.value);
-        setSelectedExtras(options);
+    const handleExtrasChange = (extraId) => {
+        setSelectedExtras(prevSelectedExtras => 
+            prevSelectedExtras.includes(extraId)
+            ? prevSelectedExtras.filter(id => id !== extraId)
+            : [...prevSelectedExtras, extraId]
+        );
     };
+
+    const toggleExtras = () => setShowExtras(!showExtras);
 
     const handleMakeReservation = () => {
         const userStartDate = new Date(startDate);
@@ -81,7 +93,11 @@ const BookingForm = ({ boatData, ownerData, renterData }) => {
             extras: selectedExtras.map(extraId => 
                 boatData.extras.find(extra => extra._id === extraId)
             ),
-            totalPrice,
+            priceDetails: {
+                basePrice,
+                extrasPrice,
+                totalPrice: basePrice + extrasPrice
+            },
             contactInfo: {
                 renter: {
                     email: renterData.email,
@@ -112,33 +128,97 @@ const BookingForm = ({ boatData, ownerData, renterData }) => {
         }
     };
 
+    const linkStyle = {
+        fontFamily: '"Source Sans Pro", sans-serif',
+        color: '#34495e',
+        fontWeight: 'bold' 
+    };
+
+    const textStyle = {
+        fontFamily: '"Source Sans Pro", sans-serif',
+        fontWeight: 'bold' 
+    };
+ 
+
     return (
-        <div>
-            <h2>Make a Reservation</h2>
-            <label>
-                Start Date:
-                <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
-            </label>
+        <Container fluid>
+            <Row className="my-4 custom-style-booking-form">
+                <Col lg={12}>
+                    <Card>
+                        <Card.Header as="h2" style={linkStyle}>Make a Reservation</Card.Header>
+                        <Card.Body>
+                            <Form>
+                            <Form.Group controlId="startDate">
+                                    <Form.Label style={linkStyle}>Start Date</Form.Label>
+                                    <Form.Control
+                                        type="date"
+                                        value={startDate}
+                                        onChange={e => {
+                                            if (!endDate || e.target.value <= endDate) {
+                                                setStartDate(e.target.value);
+                                            }
+                                        }}
+                                    />
+                                </Form.Group>
 
-            <label>
-                End Date:
-                <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
-            </label>
+                                <Form.Group controlId="endDate">
+                                    <Form.Label style={linkStyle}>End Date</Form.Label>
+                                    <Form.Control
+                                        type="date"
+                                        value={endDate}
+                                        onChange={e => {
+                                            if (!startDate || e.target.value >= startDate) {
+                                                setEndDate(e.target.value);
+                                            }
+                                        }}
+                                    />
+                                </Form.Group>
 
-            <label>
-                Extras:
-                <select multiple onChange={handleExtrasChange}>
-                    {boatData.extras.map(extra => (
-                        <option key={extra._id} value={extra._id}>{extra.option}</option>
-                    ))}
-                </select>
-            </label>
+                                <hr></hr>
 
-            <p>Total Price: {totalPrice}</p>
+                                <Button onClick={toggleExtras} className="toggle-extras-button mb-3" style={textStyle}>
+                                    {showExtras ? 'Hide Extras' : 'Choose Extras'}
+                                </Button>
+                                
+                                {showExtras && (
+                                    <>
+                                        <hr />
+                                        <div className="extras-checkboxes">
+                                            {boatData.extras.map(extra => (
+                                                <Form.Check 
+                                                    type="checkbox"
+                                                    id={`extra-${extra._id}`}
+                                                    label={`${extra.option} - ${extra.pricePerDay}`}
+                                                    checked={selectedExtras.includes(extra._id)}
+                                                    onChange={() => handleExtrasChange(extra._id)}
+                                                    key={extra._id}
+                                                    style={linkStyle}
+                                                />
+                                            ))}
+                                        </div>
+                                    </>
+                                )}
 
-            <button onClick={handleMakeReservation}>Make Reservation</button>
-            <button onClick={handleCheckAvailability}>Check Availability</button>
-        </div>
+                                <hr />
+
+                                <ListGroup variant="center">
+                                    <ListGroup.Item style={linkStyle}>
+                                        <strong>Total Price:</strong> {totalPrice},00€
+                                    </ListGroup.Item>
+                                </ListGroup>
+
+                                <Button variant="primary" onClick={handleMakeReservation} style={textStyle}>
+                                    Make Reservation
+                                </Button>
+                                <Button variant="primary" onClick={handleCheckAvailability} className="ml-2" style={textStyle}>
+                                    Check Availability
+                                </Button>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
     );
 };
 

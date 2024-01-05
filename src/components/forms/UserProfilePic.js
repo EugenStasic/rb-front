@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUserProfilePic, deleteUserProfilePic, getUserInfo } from '../../actions/userActions';
 import { fetchUserProfilePicService } from '../../services/users/userService';
+import { Button, Image, Container, Row, Col } from 'react-bootstrap';
 
 const UserProfilePic = () => {
     const dispatch = useDispatch();
@@ -38,18 +39,27 @@ const UserProfilePic = () => {
     };
 
     return (
-        <div>
-            <h1>Update Profile Picture</h1>
-            {profilePicUrl ? (
+        <Container>
+          <Row className="justify-content-center mb-3">
+            <Col xs={12} md={6} className="text-center">
+              <h3>Profile Picture</h3>
+              {profilePicUrl ? (
+                <>
+                  <Image src={profilePicUrl} roundedCircle style={{ maxWidth: '150px', maxHeight: '150px', borderRadius: '50%' }}/>
+                  <div className="mt-3">
+                    <Button onClick={handleDelete} variant="danger">Delete Picture</Button>
+                  </div>
+                </>
+              ) : (
                 <div>
-                    <img src={profilePicUrl} alt="Profile" />
-                    <button onClick={handleDelete}>Delete Picture</button>
+                  <input type="file" onChange={handleFileChange} accept="image/*" />
+                  <Button variant="primary" className="mt-2">Select an image</Button>
                 </div>
-            ) : (
-                <input type="file" onChange={handleFileChange} accept="image/*" />
-            )}
-        </div>
-    );
-};
-
-export default UserProfilePic;
+              )}
+            </Col>
+          </Row>
+        </Container>
+      );
+    };
+    
+    export default UserProfilePic;
