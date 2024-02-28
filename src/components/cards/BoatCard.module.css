@@ -1,0 +1,26 @@
+.boat-card {
+    cursor: pointer;
+}
+
+.boat-card-img {
+    object-fit: cover;
+}
+
+.gold-star {
+    color: gold;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+
+.text-end {
+    text-align: end;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+}

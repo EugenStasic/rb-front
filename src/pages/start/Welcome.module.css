@@ -1,0 +1,63 @@
+.welcomeBackground {
+    background-image: url('../../assets/images/coverimage.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+.welcomeContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 3rem;
+    padding-left: 30rem;
+}
+
+.welcomeTextOverlay {
+    background: rgba(255, 255, 255, 0.75);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #333;
+    width: auto;
+    max-width: 500px;
+}
+
+.welcomeDisplay4,
+.welcomeLead,
+.welcomeHr {
+    color: rgb(11, 7, 7);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.welcomeBtnPrimary,
+.welcomeBtnSecondary {
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin: 0 10px 10px 0;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.welcomeBtnPrimary {
+    background-color: #007bff;
+}
+
+.welcomeBtnSecondary {
+    background-color: #007bff;
+}
+
+.welcomeBtnPrimary:hover,
+.welcomeBtnPrimary:focus {
+    background-color: #0056b3;
+    color: #ffffff;
+    outline: none;
+}

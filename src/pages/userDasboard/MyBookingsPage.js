@@ -65,32 +65,58 @@ const MyBookings = () => {
         fontFamily: '"Source Sans Pro", sans-serif'
     };
 
-    const linkStyle = {
-        fontFamily: '"Source Sans Pro", sans-serif',
-        color: '#34495e',
-        fontWeight: 'bold' 
+    const textStyle = {
+      fontFamily: '"Source Sans Pro", sans-serif',
+      color: "#34495e",
+      fontWeight: "bold",
     };
 
     return (
-        <Container fluid>
-            <Row>
-                <Col md={1} lg={1} className="sidebar" style={sidebarStyle}>
-                    <h3 style={linkStyle}>Booking Status</h3>
-                    <Nav variant="pills" className="flex-column" activeKey={activeKey} onSelect={(selectedKey) => setActiveKey(selectedKey)}>
-                        <Nav.Item><Nav.Link eventKey="pending" style={linkStyle}>Pending</Nav.Link></Nav.Item>
-                        <Nav.Item><Nav.Link eventKey="ongoing" style={linkStyle}>Ongoing</Nav.Link></Nav.Item>
-                        <Nav.Item><Nav.Link eventKey="completed" style={linkStyle}>Completed</Nav.Link></Nav.Item>
-                        <Nav.Item><Nav.Link eventKey="cancelled" style={linkStyle}>Cancelled</Nav.Link></Nav.Item>
-                    </Nav>
-                </Col>
-                <Col md={9} lg={10} className="content-area" style={{ paddingLeft: '12vh'}}>
-                    <h1 style={linkStyle}>My Bookings</h1>
-                    <div className="booking-section">
-                        {renderBookingSection(activeKey)}
-                    </div>
-                </Col>
-            </Row>
-        </Container>
+      <Container fluid>
+        <Row>
+          <Col md={1} lg={1} className="sidebar" style={sidebarStyle}>
+            <h3 style={textStyle}>Booking Status</h3>
+            <Nav
+              variant="pills"
+              className="flex-column"
+              activeKey={activeKey}
+              onSelect={(selectedKey) => setActiveKey(selectedKey)}
+            >
+              <Nav.Item>
+                <Nav.Link eventKey="pending" style={textStyle}>
+                  Pending
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="ongoing" style={textStyle}>
+                  Ongoing
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="completed" style={textStyle}>
+                  Completed
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="cancelled" style={textStyle}>
+                  Cancelled
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Col>
+          <Col
+            md={9}
+            lg={10}
+            className="content-area"
+            style={{ paddingLeft: "12vh" }}
+          >
+            <h1 style={textStyle}>My Bookings</h1>
+            <div className="booking-section">
+              {renderBookingSection(activeKey)}
+            </div>
+          </Col>
+        </Row>
+      </Container>
     );
 };
 

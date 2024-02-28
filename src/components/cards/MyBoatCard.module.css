@@ -1,0 +1,28 @@
+.boat-card {
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+}
+
+.boat-card .card-img-top {
+    object-fit: cover;
+}
+
+.boat-card .card-title {
+    font-weight: bold;
+}
+
+.boat-card .text-muted {
+    color: #6c757d;
+}
+
+.boat-card .mt-2 {
+    margin-top: 0.5rem;
+}
+
+.boat-card .ms-2 {
+    margin-left: 0.5rem;
+}
+
+.boat-card .text-end {
+    text-align: end;
+}

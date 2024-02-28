@@ -1,15 +1,35 @@
+.textStyle,
+.labelStyle {
+    color: #2c3e50;
+}
+
+.labelStyle {
+    font-weight: bold;
+}
+
+.formControlStyle {
+    background-color: white;
+    border-color: #bdc3c7;
+    color: #2c3e50;
+}
+
+.buttonStyle,
+.resetButtonStyle {
+    background-color: #007bff;
+    color: white;
+}
+
+.buttonStyle {
+    border-color: #2980b9;
+}
+
+.resetButtonStyle {
+    border-color: #7f8c8d;
+}
+
 .sidebar {
     background: #ecf0f1;
     width: 250px !important;
-}
-
-.form-range::-webkit-slider-thumb {
-    background-color: #007bff;
-    border: none;
-}
-
-.form-range::-webkit-slider-runnable-track {
-    background-color: #dee2e6;
 }
 
 .form-range {
@@ -21,20 +41,15 @@
     outline: none;
 }
 
-.form-range::-moz-range-thumb {
-    background-color: #007bff;
-    border: none;
-}
-
-.form-range::-moz-range-track {
-    background-color: #dee2e6;
-}
-
+.form-range::-webkit-slider-thumb,
+.form-range::-moz-range-thumb,
 .form-range::-ms-thumb {
     background-color: #007bff;
     border: none;
 }
 
+.form-range::-webkit-slider-runnable-track,
+.form-range::-moz-range-track,
 .form-range::-ms-track {
     background-color: #dee2e6;
 }
@@ -44,7 +59,10 @@
     border-color: #007bff;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show>.btn-primary.dropdown-toggle {
     background-color: #0056b3;
     border-color: #004085;
 }
@@ -57,13 +75,6 @@
 .btn-secondary:hover {
     background-color: #545b62;
     border-color: #4e555b;
-}
-
-.btn-primary:not(:disabled):not(.disabled):active,
-.btn-primary:not(:disabled):not(.disabled).active,
-.show>.btn-primary.dropdown-toggle {
-    background-color: #0056b3;
-    border-color: #004085;
 }
 
 .btn-primary:focus,

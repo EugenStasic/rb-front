@@ -1,15 +1,25 @@
-.custom-header {
-    /* Adjust the left and right padding as needed */
+.customHeader {
     padding-left: 23%;
     padding-right: 9%;
 }
 
-.image-display-area {
+.textCenter {
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #34495e;
+    font-weight: bold;
+}
+
+.mb3 {
+    margin-bottom: 1rem;
+}
+
+.imageDisplayArea {
     display: flex;
     width: 100%;
 }
 
-.main-image-container {
+.mainImageContainer {
     width: 60%;
     height: 400px;
     display: flex;
@@ -19,13 +29,13 @@
     margin-right: 10px;
 }
 
-.main-image {
+.mainImage {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-.thumbnail-container {
+.thumbnailContainer {
     width: calc(40% - 10px);
     height: 400px;
     display: flex;

@@ -1,33 +1,42 @@
-.custom-style {
+.customStyle {
     justify-content: right;
     width: 140%;
     padding-right: 35%;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
-.boat-details {
+.boatDetails {
     width: 130%;
+    color: #34495e;
+    font-weight: bold;
 }
 
-.card-header {
+.cardHeader {
     background-color: #f7f7f7;
     color: #333;
     border-bottom: 1px solid #ddd;
 }
 
-.card-title {
+.cardTitle {
     color: #007bff;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #34495e;
+    font-weight: bold;
 }
 
-.card-text {
+.cardText {
     padding-bottom: 1rem;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
-.list-group-item {
+.listGroupItem {
     border: none;
     padding: 0.5rem 1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #34495e;
 }
 
-.list-group-item.equipment-title {
+.listGroupItemEquipmentTitle {
     background-color: #f7f7f7;
     font-weight: bold;
     padding-top: 1rem;

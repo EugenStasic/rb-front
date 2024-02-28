@@ -1,4 +1,4 @@
-.welcome-background {
+.userWelcomeBackground {
     background-image: url('../../assets/images/coverimage.jpg');
     background-size: cover;
     background-position: center center;
@@ -6,7 +6,7 @@
     min-height: 100vh;
 }
 
-.welcome-container {
+.userWelcomeContainer {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -14,7 +14,7 @@
     padding-left: 30rem;
 }
 
-.welcome-text-overlay {
+.userWelcomeTextOverlay {
     background: rgba(255, 255, 255, 0.75);
     padding: 1.5rem;
     border-radius: 0.5rem;
@@ -24,15 +24,15 @@
     max-width: 500px;
 }
 
-.welcome-display-4,
-.welcome-lead,
-.welcome-hr {
+.userWelcomeDisplay4,
+.userWelcomeLead,
+.userWelcomeHr {
     color: rgb(11, 7, 7);
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
 
-.welcome-btn-primary,
-.welcome-btn-secondary {
+.userWelcomeBtnPrimary,
+.userWelcomeBtnSecondary {
     padding: 12px 30px;
     font-size: 16px;
     font-weight: 600;
@@ -47,23 +47,23 @@
     text-decoration: none;
 }
 
-.welcome-btn-primary {
+.userWelcomeBtnPrimary {
     background-color: #007bff;
 }
 
-.welcome-btn-primary:hover,
-.welcome-btn-primary:focus {
+.userWelcomeBtnPrimary:hover,
+.userWelcomeBtnPrimary:focus {
     background-color: #0056b3;
     color: #ffffff;
     outline: none;
 }
 
-.welcome-btn-secondary {
+.userWelcomeBtnSecondary {
     background-color: #007bff;
 }
 
-.welcome-btn-secondary:hover,
-.welcome-btn-secondary:focus {
+.userWelcomeBtnSecondary:hover,
+.userWelcomeBtnSecondary:focus {
     background-color: #0056b3;
     color: #ffffff;
     outline: none;
